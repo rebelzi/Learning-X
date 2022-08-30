@@ -1,0 +1,24 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.judul {
+  color: white;
+  width: 300px;
+  height: 200px;
+  background-image: url(https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg);
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.wrap {
+  margin: 10px auto;
+  width: 300px;
+}
+
+.isi {
+    font-family: 'Roboto', sans-serif;
+}

@@ -1,79 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>SCC | jQuery Quiz</title>
 
-   <!-- importing JQuery -->
+    <!-- importing JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <style type="text/css">
-        div.question-box {
-            margin: 10px 0 20px 0;
-        }
+      div.question-box {
+        margin: 10px 0 20px 0;
+      }
     </style>
 
     <script>
-        function q1() {
-            // 1. Menerima nilai input-q1
-            // 2. Jika nilai inputnya kosong
-            // 3. Keluarkan pesan peringatan
-            // 4. Tampilkan nilai input
-        }
+      function q1() {
+          let value = $('#input-1').val();
 
-        function q2() {
-              // 1. Menerima nilai input-q2
-            // 2. Jika ada '@' di nilai input (Hint! Coba gunakan 'includes')
-            // 3. rtanny@gmail.com -> extract 'gmail'
-            // 4. Tampilkan nilai domain
-            // 5. Keluarkan peringatan jika nilai inputnya bukanlah email
+          if (value === "") {
+              alert('Isi sesuatu disini');
+          } else {
+              alert(value);
+          }
+      }
 
-        function q3() {
-            // 1. Menerima nilai input-q3
-            // 2. Keluarkan pesan peringatan jika nilai inputnya kosong
-            // 3. Dengan nilai input yang dimasukkan, buatlah list dari "names" -q3 (Gunakan backticks!)
-            // 4. masukkan temp_html ke "names:-q3
-        }
+      function q2() {
+            let email = $('#input-q2').val();
 
-        function q3_delete() {
-            // 1. Hapus semua lists di names-q3
-        }
+            if (email.includes('@')) {
+                let emailWithDot = email.split('@')[1];
+                let domainOnly = emailWithDot.split('.')[0];
+                alert(domainOnly);
+            } else {
+                alert('Email anda salah'); 
+            }
+      }
 
+      function q3() {
+          let newName = $('#input-q3').val();
+          if (newName === '') {
+              alert('Isi nama disini');
+              return;
+          }
+          let temp_html = `<li>${newName}</li>` ;
+          $('#nama').append(temp_html);
+      }
+
+      function q3_delete() {
+         $('#nama').empty();
+      }
     </script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <h1>Let's practice more jQuery!</h1>
 
     <div class="question-box">
-        <h2>Q1. Information Input Box</h2>
-        <h5>1-1. Alert the input value as you press the button</h5>
-        <h5>1-2. Alert "Insert any value!" when the input value is empty</h5>
-        <input id="input-q1" type="text" /> <button onclick="q1()">Submit</button>
+      <h2>Q1. Information Input Box</h2>
+      <input id="input-1" type="text" /> <button onclick="q1()">Submit</button>
     </div>
     <hr />
     <div class="question-box">
-        <h2>Q2. Email Checker</h2>
-        <h5>2-1. Alert the input value(email) as you press the button</h5>
-        <h5>2-2. Alert "Invalid email address" if the input value doesn't have '@'</h5>
-        <h5>2-3. Alert the domain name of the email ex. gmail, hotmail, etc. </h5>
-        <input id="input-q2" type="text" /> <button onclick="q2()">Check</button>
+      <h2>Q2. Email Checker</h2>
+      <h5>2-1. Alert the input value(email) as you press the button</h5>
+      <h5>2-2. Alert "Invalid email address" if the input value doesn't have '@'</h5>
+      <h5>2-3. Alert the domain name of the email ex. gmail, hotmail, etc.</h5>
+      <input id="input-q2" type="text" /> <button onclick="q2()">Check</button>
     </div>
     <hr />
     <div class="question-box">
-        <h2>Q3. Name List </h2>
-        <h5>3-1. Insert names to appear in list</h5>
-        <h5>3-2. Creating a button to delete all</h5>
-        <input id="input-q3" type="text" placeholder="Name here" />
-        <button onclick="q3()">Insert</button>
-        <button onclick="q3_delete()">Delete all</button>
-        <ul id="names-q3">
-            <li>Ed Sheeran</li>
-            <li>Billie Eilish</li>
-        </ul>
+      <h2>Q3. Name List</h2>
+      <h5>3-1. Insert names to appear in list</h5>
+      <h5>3-2. Creating a button to delete all</h5>
+      <input id="input-q3" type="text" placeholder="Name here" />
+      <button onclick="q3()">Insert</button>
+      <button onclick="q3_delete()">Delete all</button>
+      <ul id="nama">
+        <li>Ed Sheeran</li>
+        <li>Billie Eilish</li>
+      </ul>
     </div>
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,53 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Practice JQuery</title>
+    <!-- Import JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        div.question-box {
+            margin: 10px 0 20px 0;
+        }
+    </style>
+
+    <script>
+        function showNumMeaning() {
+            let targetNum = $('#magic-num').val();
+            if (targetNum === '') {
+                alert('Isikan Angka Terlebih Dahulu');
+                return;
+            }
+            let targetUrl = 'http://numbersapi.com/' + targetNum;
+
+            $.ajax({
+                type: 'GET',
+                url: targetUrl,
+                data: {},
+                success: function(response) {
+                    $('#meaning').text(response);
+                }
+
+            });
+        }
+    </script>
+</head>
+
+<body>
+<h1>Practice JQuery&Ajax</h1>
+
+<hr/>
+
+<div class="question-box">
+    <h2>[Ajax Quiz02] Interesting Facts about Numbers</h2>
+    <p>Every number has a meaning. Let's figure it out!</p>
+    <p>Alert a message if the input box is submitted empty.</p>
+    <input type="number" id="magic-num">
+    <button onclick="showNumMeaning()">Submit</button>
+    <h5 id="meaning"></h5>
+</div>
+</body>
+
+</html>

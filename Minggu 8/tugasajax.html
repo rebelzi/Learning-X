@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <title>Fan Book Site</title>
 
@@ -54,13 +55,23 @@
     </style>
 
     <script>
-
+      $(document).ready(function () {
+        $.ajax({
+          type: "GET",
+          url: "http://spartacodingclub.shop/sparta_api/weather/seoul",
+          data: {},
+          success: function (respones) {
+            let temp = respones["temp"];
+            $("#temp").text(temp);
+          },
+        });
+      });
     </script>
-    
   </head>
   <body>
     <div class="judul">
       <h1>Manchester United Fans Book</h1>
+      <p>Temparatur Suhu di Seoul: <span id="temp">36</span>deggress</p>
     </div>
     <div class="post">
       <div class="form-floating mb-3">
@@ -89,7 +100,7 @@
             <footer class="blockquote-footer">Fans City</footer>
           </blockquote>
         </div>
-      </div> 
+      </div>
       <div class="card">
         <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -97,7 +108,7 @@
             <footer class="blockquote-footer">Fans City</footer>
           </blockquote>
         </div>
-      </div>   
+      </div>
     </div>
   </body>
 </html>

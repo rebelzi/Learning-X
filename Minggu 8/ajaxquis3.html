@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Practice jQuery!</title>
+    <!-- Import jQuery here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style type="text/css">
+      div.question-box {
+        margin: 10px 0 20px 0;
+      }
+      div.question-box > div {
+        margin-top: 30px;
+      }
+    </style>
+
+    <script>
+      function q1() {
+        $.ajax({
+          type: 'GET',
+          url: 'http://spartacodingclub.shop/sparta_api/rtan/en',
+          data: {},
+          success: function(respones) {
+            let imgurl = respones['url'];
+            $('#img-rtan').attr('src',imgurl);
+
+            let msgurl = respones['msg'];
+            $('#text-rtan').text(msgurl);
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Let's practice jQuery and making AJAX requests!</h1>
+
+    <hr />
+
+    <div class="question-box">
+      <h2>3. Let's use the Rtanny API!</h2>
+      <p>Swap the image below with an image of Rtanny</p>
+      <p>Please swap the image every time you click the update button.</p>
+      <button onclick="q1()">Update image</button>
+      <div>
+        <img id="img-rtan" width="300" src="http://spartacodingclub.shop/static/images/rtans/SpartaIcon11.png" />
+        <h1 id="text-rtan">Hello, I am Rtanny!</h1>
+      </div>
+    </div>
+  </body>
+</html>

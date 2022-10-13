@@ -91,8 +91,32 @@
         function listing() {
             $.ajax({
                 type: 'GET',
-                url: 'http://spartacodingclub.shop/post/en'
-            })
+                url: 'http://spartacodingclub.shop/post/en',
+                data: {},
+                success: function (respones) {
+                    let movies = respones['movies'];
+                    for (let i = 0; i < movies.lenght; i++) {
+                        let movies = movies['i'];
+                        let title = movie['title'];
+                        let desc = movie['desc'];
+                        let image = movie['image'];
+                        let comment = movie['comment'];
+                        let star = movie['star'];
+                        let temp_html = `
+                        <div class="card h-100">
+                            <img src="${image}" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text">${desc}</p>
+                                <p>${star}</p>
+                                <p class="komentar">${comment}</p>
+                            </div>
+                        </div>
+                        `;
+                        $('#cards-box').append(temp_html);
+                    }
+                }
+            });
         }
 
         function open_film() {

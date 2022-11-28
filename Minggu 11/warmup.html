@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <title>Membuat Postbox Dengan Bootstrap</title>
+
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .judul {
+        width: 100%;
+        height: 250px;
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg");
+        background-position: center;
+        background-size: cover;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .judul > button {
+        width: 200px;
+        height: 50px;
+        background-color: transparent;
+        color: white;
+        border-radius: 50px;
+        border: 1px solid white;
+        margin-top: 10px;
+      }
+
+      .judul > button:hover {
+        border: 2px solid white;
+      }
+
+      .mycard {
+        margin: 20px auto 0px auto;
+        width: 95%;
+        max-width: 1200px;
+      }
+
+      .komentar {
+        color: gray;
+      }
+
+      .post {
+          width: 95%;
+          max-width: 500px;
+          margin: 20px auto 0px auto;
+          padding: 20px;
+          box-shadow: 0px 0px 3px 0px gray;
+          display: none;
+      }
+
+      .mybtn {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          margin-top: 20px;
+      }
+
+      .mybtn > button {
+          margin-right: 10px;
+      }
+    </style>
+
+    <!-- javascript -->
+    <script>
+        $(document).ready(function() {
+            listing();
+        });
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: 'http://spartacodingclub.shop/post/en',
+                data: {},
+                success: function (respones) {
+                    let movies = respones['movies'];
+                    for (let i = 0; i < movies.lenght; i++) {
+                        let movies = movies['i'];
+                        let title = movie['title'];
+                        let desc = movie['desc'];
+                        let image = movie['image'];
+                        let comment = movie['comment'];
+                        let star = movie['star'];
+                        let temp_html = `
+                        <div class="card h-100">
+                            <img src="${image}" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text">${desc}</p>
+                                <p>${star}</p>
+                                <p class="komentar">${comment}</p>
+                            </div>
+                        </div>
+                        `;
+                        $('#cards-box').append(temp_html);
+                    }
+                }
+            });
+        }
+
+        function open_film() {
+            $('#post-box').show()
+        }
+        function close_film(){
+            $('#post-box').hide()
+        }
+    </script>
+
+  </head>
+  <body>
+    <div class="judul">
+      <h1>Film Favorit</h1>
+      <button onclick="open_film()">Simpan Film Terbaru</button>
+    </div>
+
+    <div class="post" id="post-box">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="url" placeholder="Url Film" />
+        <label for="floatingInput">URL Film</label>
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Rating</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected> -- Pilih Rating -- </option>
+          <option value="1">⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Comments</label>
+      </div>
+
+      <div class="mybtn">
+        <button type="button" class="btn btn-dark">Save</button>
+        <button type="button" class="btn btn-outline-dark" onclick="close_film()">Close</button>
+      </div>
+    </div>
+
+    <div class="mycard" >
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="daftar-film">
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://upload.wikimedia.org/wikipedia/id/1/12/Start-Up_2020.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p>⭐⭐⭐</p>
+                <p class="komentar">Ini adalah Komentar</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://upload.wikimedia.org/wikipedia/id/1/12/Start-Up_2020.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p>⭐⭐⭐</p>
+                <p class="komentar">Ini adalah Komentar</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://upload.wikimedia.org/wikipedia/id/1/12/Start-Up_2020.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p>⭐⭐⭐</p>
+                <p class="komentar">Ini adalah Komentar</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://upload.wikimedia.org/wikipedia/id/1/12/Start-Up_2020.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p>⭐⭐⭐</p>
+                <p class="komentar">Ini adalah Komentar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

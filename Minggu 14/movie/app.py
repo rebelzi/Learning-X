@@ -6,14 +6,15 @@ from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
 
-dotenv_path = join(dirname(__file__), 'env')
+dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 MONGODB_URI = os.environ.get("MONGODB_URI")
-DB_NAME = os.environ.get("DB_NAME")
+DB_NAME =  os.environ.get("DB_NAME")
 
 client = MongoClient(MONGODB_URI)
-db = client(DB_NAME)
+db = client[DB_NAME]
+
 
 app = Flask(__name__)
 
